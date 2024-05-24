@@ -5,6 +5,7 @@ Pipeline for analyzing Domain-Cofactor interaction patterns using PDB and ECOD
 # Basic Usage
 
 > git clone https://github.com/chrisBioInf/PECODER/
+
 > cd PECODER
 
 (You will need, at a minimum, a functioning Pandas and Biopython installation in your Python PATH)
@@ -13,7 +14,9 @@ Pipeline for analyzing Domain-Cofactor interaction patterns using PDB and ECOD
 1.) Get the ECOD reference data base:
 
 > cd ECOD
+
 > sh download_ecod_tsv.sh 291
+
 > cd ..
 
 (you can replace the 291 with any version number you want)
