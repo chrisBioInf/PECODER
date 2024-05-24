@@ -1,0 +1,143 @@
+Cofactor_Family_Name	Cofactor_Family	Cofactor	Analog/Product	Covalent
+Ascorbic acid	ASC	﻿ASC	Representative	Yes
+Factor F430	F43	F43	Representative	No
+Phosphopantetheine	PNS	PNS	Representative	Yes
+Nicotinamide-adenine dinucleotide	NAD	NAD	Representative	No
+Nicotinamide-adenine dinucleotide	NAD	NAI	Product	No
+Nicotinamide-adenine dinucleotide	NAD	NAJ	Product	No
+Nicotinamide-adenine dinucleotide phosphate	NAP	NAP	Representative	No
+Nicotinamide-adenine dinucleotide phosphate	NAP	NDP	Product	No
+Nicotinamide	NMN	NMN	Representative	No
+Molybdopterin	MGD	MGD	Representative	No
+Molybdopterin	MGD	MTE	Product	No
+Molybdopterin	MGD	MCN	Product	No
+Cobalamin	B12	B12	Representative	No
+Cobalamin	B12	COB	Product	No
+Cobalamin	B12	CNC	Product	No
+Menaquinone	MQ7	MQ7	Representative	No
+Ubiquinone 10	U10	U10	Representative	No
+Flavin adenine dinucleotide	FAD	FAD	Representative	Yes
+Flavin adenine dinucleotide	FAD	FDA	Product	Yes
+Tetrahydrofolic acid	THG	THG	Representative	No
+Tetrahydrofolic acid	THG	FON	Product	No
+Tetrahydrofolic acid	THG	C2F	Product	No
+Tetrahydrofolic acid	THG	FFO	Product	No
+Coenzyme A	COA	H_COA	Product	No
+Coenzyme A	COA	ACO	Product	No
+Coenzyme A	COA	CAA	Product	No
+Coenzyme A	COA	COA	Representative	No
+Coenzyme A	COA	MYA	Product	No
+Coenzyme A	COA	CO8	Product	No
+Coenzyme A	COA	COD	Product	No
+Coenzyme A	COA	CMC	Product	No
+Coenzyme A	COA	HMG	Product	No
+Coenzyme A	COA	MLC	Product	No
+Coenzyme A	COA	1VU	Product	No
+Coenzyme A	COA	SCA	Product	No
+Coenzyme A	COA	HXC	Product	No
+Coenzyme A	COA	COO	Product	No
+Coenzyme A	COA	DCC	Product	No
+Coenzyme A	COA	BCO	Product	No
+Coenzyme A	COA	MCA	Product	No
+Coenzyme B	TP7	TP7	Representative	No
+Flavin Mononucleotide	FMN	FMN	Representative	No
+Flavin Mononucleotide	FMN	RBF	Product	No
+Flavin Mononucleotide	FMN	FNR	Product	No
+Coenzyme M	COM	COM	Representative	No
+Coenzyme F420	F42	F42	Representative	No
+Ubiquinone	UQ1	UQ1	Representative	No
+Ubiquinone	UQ1	UQ2	Product	No
+Heme	HEM	HDD	Product	No
+Heme	HEM	HEC	Product	No
+Heme	HEM	HEM	Representative	No
+Heme	HEM	SRM	Product	No
+Heme	HEM	HEA	Product	No
+Heme	HEM	HEB	Product	No
+Heme	HEM	COH	Product	No
+Heme	HEM	ZNH	Product	No
+Biotin	BTN	BTI	Product	Yes
+Biotin	BTN	BTN	Representative	Yes
+Glutathione	GSH	GDS	Product	No
+Glutathione	GSH	GSH	Representative	No
+Glutathione	GSH	GTX	Product	No
+Glutathione	GSH	GTS	Product	No
+Glutathione	GSH	GTB	Product	No
+Glutathione	GSH	GDN	Product	No
+Glutathione	GSH	3GC	Product	No
+Glutathione	GSH	GSF	Product	No
+S-adenosylmethionine	SAH	SAH	Representative	Yes
+S-adenosylmethionine	SAH	SAM	Product	Yes
+S-adenosylmethionine	SAH	SFG	Product	Yes
+Thiamine diphosphate	TPP	TPP	Representative	No
+Thiamine diphosphate	TPP	TZD	Product	No
+Thiamine diphosphate	TPP	HTL	Product	No
+Pyridoxal 5'-phosphate	PLP	PLP	Representative	Yes
+Pyridoxal 5'-phosphate	PLP	PMP	Product	Yes
+Pyridoxal 5'-phosphate	PLP	DCS	Product	Yes
+Pyridoxal 5'-phosphate	PLP	PLG	Product	Yes
+Pyridoxal 5'-phosphate	PLP	PLR	Product	Yes
+Fe4S4 cluster	SF4	SF4	Representative	Yes
+Fe2S2 cluster	FES	FES	Representative	Yes
+Fe3S4 cluster	F3S	F3S	Representative	Yes
+Lipoic acid	LPA	LPA	Representative	No
+Methanofuran	MFN	MFN	Representative	No
+Pyrroloquinoline quinone	PQQ	PQQ	Representative	No
+Tetrahydrobiopterin	H4B	H4B	Representative	No
+Tetrahydrobiopterin	H4B	HBI	Product	No
+Tetrahydrobiopterin	H4B	H2B	Product	No
+Adenosine triphosphate	ATP	ADP	Product	No
+Adenosine triphosphate	ATP	ATP	Representative	No
+Adenosine triphosphate	ATP	ANP	Analog	No
+Adenosine triphosphate	ATP	AMP	Product	No
+Adenosine triphosphate	ATP	ACP	Analog	No
+Adenosine triphosphate	ATP	AGS	Analog	No
+Adenosine triphosphate	ATP	APC	Analog	No
+3'-phosphate adenosine 5'-phosphate sulfate	PPS	PPS	Representative	No
+3'-phosphate adenosine 5'-phosphate sulfate	PPS	A3P	Product	No
+Guanosine triphosphate	GTP	GDP	Product	No
+Guanosine triphosphate	GTP	GTP	Representative	No
+Guanosine triphosphate	GTP	GNP	Product	No
+Guanosine triphosphate	GTP	5GP	Product	No
+Guanosine triphosphate	GTP	GSP	Analog	No
+Guanosine triphosphate	GTP	GCP	Analog	No
+Guanosine triphosphate	GTP	G2P	Analog	No
+Cytidine triphosphate	CTP	CDP	Product	No
+Cytidine triphosphate	CTP	CTP	Representative	No
+Cytidine triphosphate	CTP	C5P	Product	No
+Uridine triphosphate	UTP	UDP	Product	No
+Uridine triphosphate	UTP	UTP	Representative	No
+Uridine triphosphate	UTP	U5P	Product	No
+Uridine diphosphate galactose	GDU	GDU	Representative	No
+Uridine diphosphate glucose	UPG	UPG	Representative	No
+Uridine diphosphate glucose	UPG	U2F	Analog	No
+Uridine diphosphate xylopyranose	UDX	UDX	Representative	No
+Uridine diphosphate N-acetylglucosamine	UD1	UD1	Representative	No
+Uridine diphosphate N-acetylgalactosamine	UD2	UD2	Representative	No
+Guanosine diphosphate sugar	GDD	GDD	Representative	No
+Guanosine diphosphate sugar	GDD	GFB	Product	No
+Cytidine monophosphate 	NCC	NCC	Representative	No
+Cytidine monophosphate 	NCC	CMK	Product	No
+Cytidine monophosphate 	NCC	CSF	Analog	No
+Metal ion	METAL	NI	Representative	Yes
+Metal ion	METAL	CU	Representative	Yes
+Metal ion	METAL	FE	Representative	Yes
+Metal ion	METAL	FE2	Representative	Yes
+Metal ion	METAL	CO	Representative	Yes
+Metal ion	METAL	MO	Representative	Yes
+Metal ion	METAL	MG	Representative	Yes
+Metal ion	METAL	MN	Representative	Yes
+Metal ion	METAL	ZN	Representative	Yes
+Deoxyadenosine triphosphate	DTP	DTP	Representative	No
+Inosine monophosphate	IMP	IMP	Representative	No
+Thymidine triphosphate	TTP	TMP	Product	No
+Thymidine triphosphate	TTP	TYD	Product	No
+Thymidine triphosphate	TTP	TTP	Representative	No
+Deoxyguanosine triphosphate	DGT	DGT	Representative	No
+Deoxyguanosine triphosphate	DGT	XG4	Analog	No
+Xanthosine monophosphate	XMP	XMP	Representative	No
+Dideoxyguanosine triphosphate	DG3	DG3	Representative	No
+Guanosine 5',3'-tetraphosphate	G4P	G4P	Representative	No
+Deoxycytidine triphosphate	DCP	DCP	Representative	No
+Dideoxycytidine triphosphate	DCT	DCT	Representative	No
+Deoxyuridine monophosphate	UMP	UMP	Representative	No
+Deoxyuridine monophosphate	UMP	DUP	Analog	No
