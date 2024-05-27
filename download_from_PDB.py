@@ -64,7 +64,7 @@ def download_structures_with_cofactor(cofactor: str, flatfile: str, outdir: str,
     
     for i, idx in enumerate(pdb_id_list):
         if verbose:
-            print("Now downloading (%s/%s):" % (i, n_ids))
+            print("Now downloading (%s/%s):" % (i+1, n_ids))
         
         ret_ = download_id(pdb_id=idx, outdir=outdir, filetype=filetype, verbose=verbose)
         return_codes.append(ret_)
