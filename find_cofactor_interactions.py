@@ -34,6 +34,7 @@ import glob
 
 import sqlite3
 from sqlite_interface import create_table_if_not_existing, add_rows_to_table
+from lookup_tables import architecture_type, IUPAC_alphabet
 
 
 THIS_FILE = os.path.abspath(__file__)
@@ -199,8 +200,10 @@ def export_dataframe(filename: str, chains: list, res_name: list, residue_n: lis
         'atom_cofactor': atoms_cofactor,
         'atom_residue': atoms_residue,
         }
+    accepted_amino_acids = set((aa for aa in IUPAC_alphabet.keys()))
+    
     df = pd.DataFrame(data=data)
-    df = df[df["residue"] != 'HOH']
+    df = df[df["residue"].isin(accepted_amino_acids)]
     df['pdb'] = df['pdb'].astype(str)
     df['chain'] = df['chain'].astype(str)
     df['number'] = df['number'].astype(int)
@@ -208,9 +211,14 @@ def export_dataframe(filename: str, chains: list, res_name: list, residue_n: lis
     return df 
 
 
+def assign_analysis_labels(df: pd.DataFrame) -> pd.DataFrame:
+    df['architecture'] = [architecture_type.get(a, '-') for a in df['ecod_a_name']]
+    return df
+
+
 def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family: str, outdir: str):
     parser = PDBParser()
-    connection = sqlite3.connect('Cofactor_domains.db')
+    # connection = sqlite3.connect('Cofactor_domains.db')
     # last_row_id = create_table_if_not_existing(connection)
     
     df_ecod = pd.read_csv(ecod_file, sep='\t', skiprows=4)
@@ -220,7 +228,7 @@ def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family
 
     for i, filename in enumerate(glob.glob(os.path.join(pdb_dir, '*.pdb'))):
         pdb_id = os.path.basename(filename).strip('.pdb').lower()
-        ecod_ = explode_pdb_range(df_ecod[df_ecod["pdb"] == pdb_id], connection)
+        ecod_ = explode_pdb_range(df_ecod[df_ecod["pdb"] == pdb_id], connection=None)
 
         print("Loading structure: %s" % filename)
         
@@ -275,12 +283,12 @@ def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family
                               interaction_partner, atoms_cofactor, atoms_residue,
                               df_cofactor_family['Cofactor_Family'].iloc[0], cofactor_id)
         df_merged = df.merge(ecod_, on=["pdb", "chain", "number"], how='left')
-        
+        df_merged = assign_analysis_labels(df_merged)
         outfile = os.path.join(outdir, '%s.tsv' % pdb_id)
         df_merged.to_csv(outfile, sep='\t', index=None)
         # cursor = add_rows_to_table(connection, table='interactions', df=df_merged)
         # print(df_merged)
     
-    connection.close()
+    # connection.close()
 
 
