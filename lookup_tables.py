@@ -7,6 +7,11 @@ Created on Mon May 27 11:16:25 2024
 """
 
 
+aa_chain_backbone = set(
+    ('N', 'CA', 'C', 'CB')
+    )
+
+
 architecture_type = {
        'alpha arrays': 'a', 
        'alpha bundles': 'a',

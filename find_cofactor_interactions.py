@@ -34,7 +34,7 @@ import glob
 
 import sqlite3
 from sqlite_interface import create_table_if_not_existing, add_rows_to_table
-from lookup_tables import architecture_type, IUPAC_alphabet
+from lookup_tables import aa_chain_backbone, architecture_type, IUPAC_alphabet
 
 
 THIS_FILE = os.path.abspath(__file__)
@@ -156,6 +156,8 @@ def calculate_aa_distances(residue1, residue2) -> (list, list, list):
     
     for atomA in residue1.get_list():
         for atomB in residue2.get_list():
+            if (atomB.get_id() in aa_chain_backbone):
+                continue
             distances.append(spatial_distance(atomA, atomB))
             atoms_res1.append(atomA)
             atoms_res2.append(atomB)
@@ -196,7 +198,7 @@ def export_dataframe(filename: str, chains: list, res_name: list, residue_n: lis
         'distance': distances,
         'cofactor': interaction_partner,
         'family': family,
-        'cofactor_id': target_id,
+        'ligand_id': target_id,
         'atom_cofactor': atoms_cofactor,
         'atom_residue': atoms_residue,
         }
@@ -251,6 +253,7 @@ def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family
         for target, idx in zip(targets, target_ids):
             id_ = target.get_id()
             print("\nCofactor: %s (res: %s)" % (id_[0], id_[1]))
+            print("%s %s" % (target, idx))
             print("Interacting residues:")
             
             for chain in structure[0].get_list():
@@ -260,7 +263,7 @@ def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family
                     
                     distances, atoms_target, atoms_aa = calculate_aa_distances(target, res)
                     
-                    if (min(distances) > distance_threshold):
+                    if (len(distances) == 0) or (min(distances) > distance_threshold):
                         continue
                     
                     for distance, atomA, atomB in zip(distances, atoms_target, atoms_aa):
