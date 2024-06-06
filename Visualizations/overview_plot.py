@@ -37,6 +37,7 @@ tertiary_structure_values = {
 architecture_types = ['a', 'b', 'a+b', 'a/b']
 
 working_dir = sys.argv[1]
+title = sys.argv[2]
 filelist = glob.glob(os.path.join(working_dir, '*.tsv'))
 
 a_s = []
@@ -83,14 +84,13 @@ for file in filelist:
         b_s.append(beta / len(df_agg))
         n_res.append(len(df_agg))
         n_chains.append(len(df_['chain'].unique()))
-        n_domains.append(len(df_['ecod_domain_id'].unique()))
+        n_domains.append(len(df_['ecod_domain_id'].dropna().unique()))
         min_distances.append(df_agg['distance'].min())
         max_distances.append(df_agg['distance'].max())
         
         df_domains = df_.groupby(by=['ecod_domain_id'], group_keys=False).agg({'ecod_t_name': 'first',
                                                                      'distance': 'mean',
                                                                      'atom_residue': 'count'})
-        print(df_domains)
         for i, row in df_domains.iterrows():
             domain_ligands.append('ligand_%s' % count)
             domain_names.append(row['ecod_t_name'])
@@ -113,6 +113,8 @@ data = {
 df_plot = pd.DataFrame(data=data)
 
 fig, ax = plt.subplots(2, 2, figsize=(10, 9))
+
+fig.suptitle("%s domain interaction" % title )
 
 sns.scatterplot(data=df_plot, x='beta [sum]', y='alpha [sum]', size='# Interacting domains', ax=ax[0][0])
 ax[0][0].plot([0, max(df_plot['beta [sum]'])], [0, max(df_plot['alpha [sum]'])], 'k--', alpha=0.5)
@@ -179,7 +181,7 @@ for idx in df_domains['Ligand idx'].unique():
     diversity_set = [abs(a-b) for a, b in itertools.combinations(interaction_fraction, 2)]
     interactions_per_ligand.append(len(df_))
     diversity_index.append(max(diversity_set))
-    print(interaction_fraction, diversity_set, 1 - max(diversity_set))
+    # print(interaction_fraction, diversity_set, 1 - max(diversity_set))
 
 
 diversity_data = {
@@ -192,14 +194,15 @@ ax[1][1].set_ylim((-0.1, 1.1))
 ax[1][1].set_xlabel('# of domains')
 ax[1][1].set_ylabel('Polarity index')
 
+
 """
 sns.scatterplot(data=domain_data, x='Domain 1', y='Domain 2', hue='Domain 3', ax=ax[1][1])
 ax[1][1].set_xlim((-0.1, 1.1))
 ax[1][1].set_ylim((-0.1, 1.1))
 ax[1][1].plot([1,0], [0, 1], 'k--', alpha=0.5) 
-
-plt.savefig('CoA_overview.svg', bbox_inches='tight', dpi=300)
 """
+
+plt.savefig('%s_overview_plot.svg' % title, bbox_inches='tight', dpi=300)
 
 plt.show()
     
