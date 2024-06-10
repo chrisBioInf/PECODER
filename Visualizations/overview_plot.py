@@ -113,7 +113,6 @@ data = {
 df_plot = pd.DataFrame(data=data)
 
 fig, ax = plt.subplots(2, 2, figsize=(10, 9))
-
 fig.suptitle("%s domain interaction" % title )
 
 sns.scatterplot(data=df_plot, x='beta [sum]', y='alpha [sum]', size='# Interacting domains', ax=ax[0][0])
@@ -184,6 +183,8 @@ for idx in df_domains['Ligand idx'].unique():
     # print(interaction_fraction, diversity_set, 1 - max(diversity_set))
 
 
+
+"""
 diversity_data = {
     'Polarity index': diversity_index,
     '# of domains': interactions_per_ligand,
@@ -193,7 +194,7 @@ sns.boxplot(data=diversity_data, x='# of domains', y='Polarity index', ax=ax[1][
 ax[1][1].set_ylim((-0.1, 1.1))
 ax[1][1].set_xlabel('# of domains')
 ax[1][1].set_ylabel('Polarity index')
-
+"""
 
 """
 sns.scatterplot(data=domain_data, x='Domain 1', y='Domain 2', hue='Domain 3', ax=ax[1][1])
