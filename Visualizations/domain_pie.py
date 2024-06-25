@@ -28,3 +28,4 @@ def draw_anchor_domains(name: str, anchor_domains: dict):
     if len(name) > 0:
         plt.savefig(name.split('.')[0] + '_anchor_pie.svg', dpi=300)
     
+    plt.show()

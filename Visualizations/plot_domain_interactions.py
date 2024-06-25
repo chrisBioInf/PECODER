@@ -42,7 +42,8 @@ def aggregate_all_tables(directory: str) -> pd.DataFrame:
     dfs = []
     
     for file in filelist:
-        df = pd.read_csv(file, sep='\t')
+        df = pd.read_csv(file, sep='\t', dtype={'pdb': str, 'ligand_id': str, 
+                                                'distance': np.float64, 'number': np.int32})
         
         if (len(df) == 0):
             continue

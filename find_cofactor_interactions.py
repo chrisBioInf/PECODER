@@ -226,7 +226,9 @@ def annotate_cofactor_interactions(ecod_file: str, pdb_dir: str, cofactor_family
     df_ecod = pd.read_csv(ecod_file, sep='\t', skiprows=4)
     
     df_cofactor_family = fetch_cofactor_family(cofactor_family)
+    print(df_cofactor_family)
     cofactor_list = list(df_cofactor_family['Cofactor'])
+    cofactor_list += ['H_%s' % lig for lig in cofactor_list]
 
     for i, filename in enumerate(glob.glob(os.path.join(pdb_dir, '*.pdb'))):
         pdb_id = os.path.basename(filename).strip('.pdb').lower()
