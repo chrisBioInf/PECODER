@@ -13,26 +13,32 @@ import pandas as pd
 
 
 arch_columns = ['a', 'b', 'a+b', 'a/b']
+order = ['a', 'b', 'a+b', 'a/b', 'None']
 xlabels = ['alpha interactions', 'beta interactions', 'alpha+beta interactions', 'alpha/beta interactions']
 
 
-def plot_architecture_comparison(name: str, architecture_table: pd.DataFrame):
+def plot_architecture_comparison(name: str, domain_table: pd.DataFrame):
     fig, axes = plt.subplots(2, 2, figsize=(10, 9))
     axes = [x for xs in axes for x in xs]
     
-    architecture_table.to_csv('architecture_table.tsv', sep='\t')
+    domain_table = domain_table[domain_table['anchor_domain_arch'] != 'None']
     
     for i in range(0, len(arch_columns)):
         arch = arch_columns[i]
         ax = axes[i]
-        key = '\{%s}' % arch
-        architecture_table[key] = architecture_table['a'] + architecture_table['b'] + architecture_table['a+b'] + architecture_table['a/b'] + architecture_table['other'] - architecture_table[arch]
-    
-        df_ = architecture_table[architecture_table['anchor domain'] == arch]
-        sns.scatterplot(data=df_, x=arch, y=key, ax=ax, edgecolor='k', hue='# of domains')
-        ax.set_xlabel(xlabels[i])
-        ax.set_ylabel('Other')
-        ax.set_ylim((-1, 50))
+        
+        df_ = domain_table[(domain_table['domain_1_arch'] == arch) & (domain_table['domain_2_arch'].isin(order))]
+        
+        data = {
+            'Domain 2 architecture': 2*list(df_['domain_2_arch']),
+            'Residues': list(df_['domain_1']) + list(df_['domain_2']) ,
+            'Architecture': len(df_)*[arch] + len(df_)*['Other']
+            }
+        sns.violinplot(data=data, x='Domain 2 architecture', y='Residues', ax=ax, 
+                       split=True, edgecolor='k', hue='Architecture',
+                       gap=.15, inner="quart", order=order)
+        ax.set_xlabel('Domain 2 architecture')
+        ax.set_ylabel('Residues')
     
     if len(name) > 0:
         plt.savefig(name.split('.')[0] + '_alpha_beta.svg', dpi=300)

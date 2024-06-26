@@ -11,13 +11,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def draw_anchor_domains(name: str, anchor_domains: dict):
+def draw_anchor_domains(name: str, anchor_domains: pd.DataFrame):
     fig, ax = plt.subplots()
     labels, sizes = [], []
     
-    for key, val in anchor_domains.items():
-        labels.append(key)
-        sizes.append(val)
+    anchor_domains_agg = anchor_domains.groupby(by=['anchor_domain_arch']).agg({'anchor_domain_arch': 'first',
+                                                                                'domain_1': 'count'})
+    
+    for idx, row in anchor_domains_agg.iterrows():
+        labels.append(row['anchor_domain_arch'])
+        sizes.append(row['domain_1'])
 
     ax.pie(sizes, labels=labels, autopct='%1.1f%%',
            pctdistance=1.25, labeldistance=.6,
