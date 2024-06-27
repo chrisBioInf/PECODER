@@ -41,7 +41,6 @@ def aggregate_all_tables(directory: str) -> pd.DataFrame:
     for file in filelist:
         df = pd.read_csv(file, sep='\t', dtype={'pdb': str, 'ligand_id': str, 
                                                 'distance': np.float64, 'number': np.int32})
-        
         if (len(df) == 0):
             continue
         
@@ -109,22 +108,23 @@ def aggregate_by_ligand_domain_interactions(df: pd.DataFrame) -> (pd.DataFrame, 
         df_ = df[df['ligand_uuid'] == ligand]
         
         # Aggregate down to residue - cofactor interactions
-        df_residues = df_.groupby(by=['residue', 'number'], group_keys=False).agg({'architecture':'first',
+        df_residues = df_.groupby(by=['residue', 'number'], group_keys=False).agg({
+                                                                                   'architecture':'first',
                                                                                    'residue': 'first',
                                                                                    'distance': 'min',
                                                                                    'ligand_uuid': 'first',
                                                                                    'ecod_x_name': 'first',
                                                                                    'ecod_domain_id': 'first',
                                                                                    't_id': 'first'})
+        df_residues.to_csv('residues_table.tsv', sep='\t')
         
         # Aggregate by involved domains
         df_ligand_xgroups = df_residues.groupby(by=['ecod_domain_id'], group_keys=False).agg({'architecture':'first',
-                                                                                      'residue': 'count',
-                                                                                      'distance': 'mean',
-                                                                                      'ligand_uuid': 'first',
-                                                                                      'ecod_x_name': 'first',
-                                                                                      't_id': 'first'})
-        
+                                                                                              'residue': 'count',
+                                                                                              'distance': 'mean',
+                                                                                              'ligand_uuid': 'first',
+                                                                                              'ecod_x_name': 'first',
+                                                                                              't_id': 'first'})
         df_ligand_xgroups['xgroup_proportion'] = df_ligand_xgroups['residue'] / df_ligand_xgroups['residue'].sum()
         df_ligand_xgroups.sort_index(inplace=True)
         dfs.append(df_ligand_xgroups)
@@ -135,8 +135,9 @@ def aggregate_by_ligand_domain_interactions(df: pd.DataFrame) -> (pd.DataFrame, 
         if (len(df_ligand_xgroups) == 0):
             continue
         
+        df_ligand_xgroups['xgroup'] = [str(x).split('.')[0] for x in df_ligand_xgroups['t_id']]
         architecture_dict['x_group_string'].append(';'.join(list(df_ligand_xgroups['ecod_x_name'])))
-        architecture_dict['domain_ids'].append('_'.join(list(df_ligand_xgroups['t_id'])))
+        architecture_dict['domain_ids'].append('_'.join(list(df_ligand_xgroups['xgroup'])))
         # ab_tuple = get_ab_values(list(df_ligand_xgroups['architecture']), list(df_ligand_xgroups['residue']))
         
         if len(df_ligand_xgroups) == 1:
@@ -217,9 +218,10 @@ def aggregate_domain_interaction_motifs(architecture_table: pd.DataFrame):
 
 
 def aggregate_by_domain_type(df: pd.DataFrame) -> pd.DataFrame:
-    df_xgroup = df.groupby(by=['t_id'], group_keys=False).agg({'architecture':'first',
-                                                               'atom_residue': 'count',
-                                                               'distance': 'mean'})
+    df['xgroup'] = [str(x).split('.')[0] for x in df['t_id']]
+    df_xgroup = df.groupby(by=['xgroup'], group_keys=False).agg({'architecture':'first',
+                                                                  'atom_residue': 'count',
+                                                                  'distance': 'mean'})
     return df_xgroup
     
 
@@ -238,7 +240,7 @@ def main():
         sys.exit()
     
     table = aggregate_all_tables(options.input)
-    print("Non-redundant domain types:", len(table['ecod_x_name'].unique()))
+    print("Non-redundant domain types:", len(table['t_id'].unique()))
     df_xgroup = aggregate_by_domain_type(table)
     df_ligand_xgroups, architecture_table = aggregate_by_ligand_domain_interactions(table)
     df_motif_table = aggregate_domain_interaction_motifs(architecture_table)
